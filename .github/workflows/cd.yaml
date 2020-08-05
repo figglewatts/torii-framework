@@ -33,4 +33,6 @@ jobs:
       - name: NuGet pack
         run: nuget pack Torii.csproj -Prop Configuration=Release
       - name: NuGet push
-        run: nuget push Torii.${{ env.GIT_TAG }}.nupkg -Source "https://nuget.pkg.github.com/figglewatts/torii-framework/index.json" -UserName figglewatts
+        run: |
+          nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/figglewatts/torii-framework/index.json" -UserName figglewatts
+          nuget push Torii.${{ env.GIT_TAG }}.nupkg -Source "GitHub"
