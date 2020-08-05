@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Torii", "Torii.csproj", "{4225333F-F13B-45E4-8322-A6B274498526}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4225333F-F13B-45E4-8322-A6B274498526}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4225333F-F13B-45E4-8322-A6B274498526}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4225333F-F13B-45E4-8322-A6B274498526}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4225333F-F13B-45E4-8322-A6B274498526}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

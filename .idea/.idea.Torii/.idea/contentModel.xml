@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Sam\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Sam\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_Torii.620381213.00" t="ExcludeRecursive" />
+    <e p="D:\Documents\git-repos\torii-framework" t="IncludeRecursive">
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="MonoBehaviour1.cs" t="Include" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="packages.config" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="AssemblyInfo.cs" t="Include" />
+      </e>
+      <e p="Torii" t="Include">
+        <e p="Audio" t="Include">
+          <e p="AudioPlayer.cs" t="Include" />
+          <e p="ToriiAudioClip.cs" t="Include" />
+        </e>
+        <e p="Binding" t="Include">
+          <e p="AbstractDataBinding.cs" t="Include" />
+          <e p="BindBroker.cs" t="Include" />
+          <e p="DataBinding.cs" t="Include" />
+          <e p="IPropertyWatcher.cs" t="Include" />
+        </e>
+        <e p="Build" t="Include">
+          <e p="Editor" t="Include">
+            <e p="BuildDefinition.cs" t="Include" />
+            <e p="BuildScript.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Console" t="Include">
+          <e p="ConsoleAttribute.cs" t="Include" />
+          <e p="ConsoleOpener.cs" t="Include" />
+          <e p="DevConsole.cs" t="Include" />
+          <e p="UIDevConsole.cs" t="Include" />
+          <e p="UIDevConsoleOutputRow.cs" t="Include" />
+        </e>
+        <e p="Coroutine" t="Include">
+          <e p="Coroutines.cs" t="Include" />
+          <e p="Marathon.cs" t="Include" />
+        </e>
+        <e p="Event" t="Include">
+          <e p="Editor" t="Include">
+            <e p="ToriiEventEditor.cs" t="Include" />
+          </e>
+          <e p="ToriiEvent.cs" t="Include" />
+          <e p="ToriiEventListener.cs" t="Include" />
+          <e p="TriggerOnAwake.cs" t="Include" />
+          <e p="TriggerOnKeypress.cs" t="Include" />
+          <e p="TriggerOnStart.cs" t="Include" />
+        </e>
+        <e p="Exceptions" t="Include">
+          <e p="ToriiResourceLoadException.cs" t="Include" />
+        </e>
+        <e p="Graphics" t="Include">
+          <e p="FastMesh.cs" t="Include" />
+        </e>
+        <e p="Pooling" t="Include">
+          <e p="IObjectPool.cs" t="Include" />
+          <e p="PoolItem.cs" t="Include" />
+          <e p="PoolObject.cs" t="Include" />
+          <e p="PrefabPool.cs" t="Include" />
+        </e>
+        <e p="Resource" t="Include">
+          <e p="GenericResource.cs" t="Include" />
+          <e p="IResourceHandler.cs" t="Include" />
+          <e p="ITextAssetHandler.cs" t="Include" />
+          <e p="Resource.cs" t="Include" />
+          <e p="ResourceLifespans.cs" t="Include" />
+          <e p="ResourceManager.cs" t="Include" />
+        </e>
+        <e p="Serialization" t="Include">
+          <e p="JsonColorConverter.cs" t="Include" />
+          <e p="JsonQuaternionConverter.cs" t="Include" />
+          <e p="JsonVector3Converter.cs" t="Include" />
+          <e p="ToriiSerializer.cs" t="Include" />
+        </e>
+        <e p="UI" t="Include">
+          <e p="ContainerPopulator.cs" t="Include" />
+          <e p="Dropdown.cs" t="Include" />
+          <e p="DropdownPopulator.cs" t="Include" />
+          <e p="IPopulator.cs" t="Include" />
+          <e p="Slider.cs" t="Include" />
+          <e p="Text.cs" t="Include" />
+          <e p="Toggle.cs" t="Include" />
+          <e p="ToriiFader.cs" t="Include" />
+        </e>
+        <e p="UnityEditor" t="Include">
+          <e p="BrowseFileSystemAttribute.cs" t="Include" />
+          <e p="Editor" t="Include">
+            <e p="BrowseFileSystemDrawer.cs" t="Include" />
+            <e p="CommonGUI.cs" t="Include" />
+            <e p="ScenePickerEditor.cs" t="Include" />
+          </e>
+          <e p="ScenePicker.cs" t="Include" />
+        </e>
+        <e p="Util" t="Include">
+          <e p="AttributeUtil.cs" t="Include" />
+          <e p="DontDestroy.cs" t="Include" />
+          <e p="Editor" t="Include">
+            <e p="EditorWindowExtensions.cs" t="Include" />
+          </e>
+          <e p="EnumUtil.cs" t="Include" />
+          <e p="FixedTimeSince.cs" t="Include" />
+          <e p="FramesSince.cs" t="Include" />
+          <e p="MatchTransform.cs" t="Include" />
+          <e p="MonoSingleton.cs" t="Include" />
+          <e p="PathUtil.cs" t="Include" />
+          <e p="RandUtil.cs" t="Include" />
+          <e p="TextureUtil.cs" t="Include" />
+          <e p="TimeSince.cs" t="Include" />
+          <e p="ToriiCursor.cs" t="Include" />
+          <e p="UtilBehaviour.cs" t="Include" />
+          <e p="WriteOnce.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Torii.csproj" t="IncludeRecursive" />
+      <e p="Torii.sln" t="IncludeFlat" />
+    </e>
+  </component>
+</project>
