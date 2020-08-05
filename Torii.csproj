@@ -135,6 +135,7 @@
     <Compile Include="Torii\Serialization\JsonVector3Converter.cs" />
     <Compile Include="Torii\Serialization\ToriiSerializer.cs" />
     <Compile Include="Torii\UI\ContainerPopulator.cs" />
+    <Compile Include="Torii\UI\CustomResolutionCanvas.cs" />
     <Compile Include="Torii\UI\Dropdown.cs" />
     <Compile Include="Torii\UI\DropdownPopulator.cs" />
     <Compile Include="Torii\UI\IPopulator.cs" />
@@ -162,12 +163,14 @@
     <Compile Include="Torii\Util\ToriiCursor.cs" />
     <Compile Include="Torii\Util\UtilBehaviour.cs" />
     <Compile Include="Torii\Util\WriteOnce.cs" />
+    <Compile Include="Torii\Variable\FloatVariable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="Torii\Variable\FloatVariable.cs.meta" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
