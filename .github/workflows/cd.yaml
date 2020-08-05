@@ -24,7 +24,7 @@ jobs:
       - name: Setup NuGet
         uses: nuget/setup-nuget@v1
         with:
-          nuget-api-key: ${{ secrets.GITHUB_TOKEN }}
+          nuget-api-key: ${{ secrets.NuGetAPIKey }}
           nuget-version: '5.x'
       - name: Restore NuGet packages
         run: nuget restore
@@ -33,6 +33,4 @@ jobs:
       - name: NuGet pack
         run: nuget pack Torii.csproj -Prop Configuration=Release
       - name: NuGet push
-        run: |
-          nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/figglewatts/torii-framework/index.json" -UserName figglewatts
-          nuget push Torii.${{ env.GIT_TAG }}.nupkg -Source "GitHub"
+        run: nuget push Torii.${{ env.GIT_TAG }}.nupkg -Source https://api.nuget.org/v3/index.json
