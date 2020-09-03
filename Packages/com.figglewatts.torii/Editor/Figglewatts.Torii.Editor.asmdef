@@ -1,0 +1,19 @@
+{
+    "name": "Figglewatts.Torii.Editor",
+    "references": [
+        "GUID:8563dbcc338096443b0f8f9baf58eef4"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Newtonsoft.Json.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,17 @@
+{
+    "name": "Figglewatts.Torii",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "NVorbis.dll",
+        "Newtonsoft.Json.dll",
+        "protobuf-net.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
