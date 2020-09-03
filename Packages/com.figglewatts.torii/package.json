@@ -1,6 +1,6 @@
 {
   "name": "com.figglewatts.torii",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "displayName": "Torii Framework",
   "description": "The Torii Framework for Unity",
   "unity": "2019.4",
