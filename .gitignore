@@ -508,3 +508,4 @@ InitTestScene*.unity
 # End of https://www.toptal.com/developers/gitignore/api/unity
 
 !Packages/com.figglewatts.torii
+!Packages/com.figglewatts.torii/**/*.meta
