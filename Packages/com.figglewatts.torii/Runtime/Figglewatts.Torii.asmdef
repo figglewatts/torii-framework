@@ -6,8 +6,8 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "NVorbis.dll",
         "Newtonsoft.Json.dll",
+        "NVorbis.dll",
         "protobuf-net.dll"
     ],
     "autoReferenced": false,
