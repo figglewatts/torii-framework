@@ -509,3 +509,4 @@ InitTestScene*.unity
 !Packages/com.figglewatts.torii
 !Packages/com.figglewatts.torii/**/*.meta
 !ProjectTemplate/**/*.meta
+!ProjectTemplate/**/Packages/**

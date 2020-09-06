@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "com.figglewatts.torii": "https://github.com/Figglewatts/torii-framework.git?path=/Packages/com.figglewatts.torii##{VERSION_NUMBER}#"
+  }
+}
