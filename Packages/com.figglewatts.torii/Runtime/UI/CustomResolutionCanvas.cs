@@ -14,7 +14,12 @@ public class CustomResolutionCanvas : MonoBehaviour
     private CanvasScaler _scaler;
     private RectTransform _rect;
 
-    public void OnValidate()
+    public void Start() { scaleCanvas(); }
+
+    public void OnValidate() { scaleCanvas(); }
+
+    [ContextMenu("Scale Canvas")]
+    private void scaleCanvas()
     {
         if (TargetCamera == null)
         {

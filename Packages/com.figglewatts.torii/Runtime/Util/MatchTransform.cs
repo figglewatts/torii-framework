@@ -17,6 +17,7 @@ namespace Torii.Util
                 MatchPosZ = value;
             }
         }
+
         public bool MatchPosX;
         public bool MatchPosY;
         public bool MatchPosZ;
@@ -31,6 +32,7 @@ namespace Torii.Util
                 MatchRotZ = value;
             }
         }
+
         public bool MatchRotX;
         public bool MatchRotY;
         public bool MatchRotZ;
@@ -45,6 +47,7 @@ namespace Torii.Util
                 MatchScaleZ = value;
             }
         }
+
         public bool MatchScaleX;
         public bool MatchScaleY;
         public bool MatchScaleZ;
@@ -62,14 +65,17 @@ namespace Torii.Util
             {
                 pos.x = Match.position.x;
             }
+
             if (MatchPosY)
             {
                 pos.y = Match.position.y;
             }
+
             if (MatchPosZ)
             {
                 pos.z = Match.position.z;
             }
+
             _this.position = pos;
 
             Vector3 euler = _this.rotation.eulerAngles;
@@ -77,14 +83,17 @@ namespace Torii.Util
             {
                 euler.x = Match.rotation.eulerAngles.x;
             }
+
             if (MatchRotY)
             {
                 euler.y = Match.rotation.eulerAngles.y;
             }
+
             if (MatchRotZ)
             {
                 euler.z = Match.rotation.eulerAngles.z;
             }
+
             _this.rotation = Quaternion.Euler(euler);
 
             Vector3 scale = _this.localScale;
@@ -92,14 +101,17 @@ namespace Torii.Util
             {
                 scale.x = Match.localScale.x;
             }
+
             if (MatchScaleY)
             {
                 scale.y = Match.localScale.y;
             }
+
             if (MatchScaleZ)
             {
                 scale.z = Match.localScale.z;
             }
+
             _this.localScale = scale;
         }
     }
