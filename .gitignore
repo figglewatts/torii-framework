@@ -230,7 +230,6 @@ _pkginfo.txt
 # Others
 ClientBin/
 ~$*
-*~
 *.dbmdl
 *.dbproj.schemaview
 *.jfm
@@ -509,3 +508,4 @@ InitTestScene*.unity
 
 !Packages/com.figglewatts.torii
 !Packages/com.figglewatts.torii/**/*.meta
+!ProjectTemplate/**/*.meta
