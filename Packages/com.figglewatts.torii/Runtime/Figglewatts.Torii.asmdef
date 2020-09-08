@@ -10,7 +10,7 @@
         "NVorbis.dll",
         "protobuf-net.dll"
     ],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false
