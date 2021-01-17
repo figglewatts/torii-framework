@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using UnityEngine;
 using Random = System.Random;
@@ -13,11 +12,6 @@ namespace Torii.Util
     /// </summary>
     public static class RandUtil
     {
-        /// <summary>
-        /// The current seed of the random number generator.
-        /// </summary>
-        public static int CurrentSeed { get; private set; }
-
         private static Random _rand;
 
         private static readonly Color[] _randomColors = new[]
@@ -38,8 +32,8 @@ namespace Torii.Util
         /// </summary>
         public static void RefreshSeed()
         {
-            CurrentSeed = (int)DateTime.Now.Ticks & 0x0000FFFF;
-            _rand = new Random(CurrentSeed);
+            var seed = (int)DateTime.Now.Ticks & 0x0000FFFF;
+            _rand = new Random(seed);
         }
 
         /// <summary>
@@ -91,18 +85,43 @@ namespace Torii.Util
         public static float Float(float max) { return Float(0, max); }
 
         /// <summary>
-        /// Generate a random color.
+        /// Generate a random color from a set of 7 colors.
+        ///
+        /// White, red, yellow, blue, cyan, green, or magenta.
+        ///
+        /// If you want to generate a fully random color, use FullyRandColor(). 
         /// </summary>
         /// <returns>A random color.</returns>
         public static Color RandColor() { return _randomColors[Int(_randomColors.Length)]; }
 
-        public static string RandomLevelFromDir(string levelDir)
+        /// <summary>
+        /// Generate a random color from a set of 7 colours.
+        ///
+        /// White, red, yellow, blue, cyan, green, or magenta.
+        ///
+        /// If you want to generate a fully random colour, use FullyRandColour(). 
+        /// </summary>
+        /// <returns>A random colour.</returns>
+        public static Color RandColour() { return RandColor(); }
+
+        /// <summary>
+        /// Generate a fully random color. This could produce lots of browns or baby-sick type colors, so if
+        /// you're looking for an easily recognisable color then use RandColor() instead.
+        /// </summary>
+        /// <param name="transparency">Should transparency be randomised too?</param>
+        /// <returns>A fully random color.</returns>
+        public static Color FullyRandColor(bool transparency = false)
         {
-            // TODO: refactor RandUtil.RandomLevelFromDir in DreamDirector refactor
-            string[] filesInDir =
-                Directory.GetFiles(PathUtil.Combine(Application.streamingAssetsPath, "levels", levelDir), "*.tmap");
-            return PathUtil.Combine("levels", levelDir, filesInDir[Int(filesInDir.Length)]);
+            return new Color(Float(0, 1), Float(0, 1), Float(0, 1), transparency ? Float(0, 1) : 1);
         }
+
+        /// <summary>
+        /// Generate a fully random colour. This could produce lots of browns or baby-sick type colours, so if
+        /// you're looking for an easily recognisable colour then use RandColour() instead.
+        /// </summary>
+        /// <param name="transparency">Should transparency be randomised too?</param>
+        /// <returns>A fully random colour.</returns>
+        public static Color FullyRandColour(bool transparency = false) { return FullyRandColor(transparency); }
 
         /// <summary>
         /// Choose a random element from an array.
@@ -116,26 +135,54 @@ namespace Torii.Util
         /// Choose a random element from a list.
         /// </summary>
         /// <param name="list">The list.</param>
-        /// <typeparam name="T">The type opf the objects contained within the list.</typeparam>
+        /// <typeparam name="T">The type of the objects contained within the list.</typeparam>
         /// <returns>The random choice.</returns>
         public static T RandomListElement<T>(List<T> list) { return list[Int(list.Count)]; }
 
+        /// <summary>
+        /// Choose a random element from an IEnumerable.
+        /// </summary>
+        /// <param name="list">The enumerable.</param>
+        /// <typeparam name="T">The type of the elements in the enumerable.</typeparam>
+        /// <returns>The random element.</returns>
         public static T RandomListElement<T>(IEnumerable<T> list)
         {
             IEnumerable<T> enumerable = list.ToList();
             return enumerable.ToList()[Int(enumerable.Count())];
         }
 
-        public static T RandomEnum<T>()
+        /// <summary>
+        /// Choose a random enum value.
+        /// </summary>
+        /// <typeparam name="T">The enum type.</typeparam>
+        /// <returns>The random enum value.</returns>
+        public static T RandomEnum<T>() where T : Enum
         {
             var v = Enum.GetValues(typeof(T));
             return (T)v.GetValue(_rand.Next(v.Length));
         }
 
+        /// <summary>
+        /// Select a random array element from values given in varargs.
+        /// </summary>
+        /// <param name="list">The varargs params.</param>
+        /// <typeparam name="T">The type of the params.</typeparam>
+        /// <returns>The randomly chosen element.</returns>
         public static T From<T>(params T[] list) { return RandomArrayElement(list); }
 
+        /// <summary>
+        /// If you want something to happen one in every X times, this will calculate whether it happened.
+        /// </summary>
+        /// <param name="chance">The chance of it happening.</param>
+        /// <returns>True if it happened, false otherwise.</returns>
         public static bool OneIn(float chance) { return Float(chance) < 1f / chance; }
 
+        /// <summary>
+        /// Shuffle a list with Fisher-Yates.
+        /// </summary>
+        /// <param name="list">The list to shuffle.</param>
+        /// <typeparam name="T">The type of the list.</typeparam>
+        /// <returns>The shuffled list.</returns>
         // from: https://stackoverflow.com/a/1262619/13166789
         public static List<T> Shuffle<T>(List<T> list)
         {
@@ -152,21 +199,36 @@ namespace Torii.Util
             return list;
         }
 
-        public static T[] Shuffle<T>(T[] list)
+        /// <summary>
+        /// Shuffle an array with Fisher-Yates.
+        /// </summary>
+        /// <param name="array">The array to shuffle.</param>
+        /// <typeparam name="T">The type of the elements in the array.</typeparam>
+        /// <returns>The shuffled array.</returns>
+        /// // from: https://stackoverflow.com/a/1262619/13166789
+        public static T[] Shuffle<T>(T[] array)
         {
-            int n = list.Length;
+            int n = array.Length;
             while (n > 1)
             {
                 n--;
                 int k = _rand.Next(n + 1);
-                T val = list[k];
-                list[k] = list[n];
-                list[n] = val;
+                T val = array[k];
+                array[k] = array[n];
+                array[n] = val;
             }
 
-            return list;
+            return array;
         }
 
+        /// <summary>
+        /// Pick a random element from a given sequence according to a function that picks weights for each
+        /// element. This lets you pick things using weighted randoms, with different chances for each element.
+        /// </summary>
+        /// <param name="sequence">The sequence to choose from.</param>
+        /// <param name="weightFunction">A function that, given an element, returns its weight.</param>
+        /// <typeparam name="T">The type of the elements in the sequence.</typeparam>
+        /// <returns>The chosen sequence element.</returns>
         // adapted from: https://stackoverflow.com/a/11930875/13166789
         public static T WeightedRandomElement<T>(IEnumerable<T> sequence, Func<T, float> weightFunction)
         {
