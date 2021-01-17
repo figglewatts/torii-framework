@@ -166,5 +166,24 @@ namespace Torii.Util
 
             return list;
         }
+
+        // adapted from: https://stackoverflow.com/a/11930875/13166789
+        public static T WeightedRandomElement<T>(IEnumerable<T> sequence, Func<T, float> weightFunction)
+        {
+            IEnumerable<T> enumeratedSequence = sequence as T[] ?? sequence.ToArray();
+            float totalWeight = enumeratedSequence.Sum(weightFunction);
+            float itemWeightIndex = Float() * totalWeight; // the weight of the item to select
+            float currentWeightIndex = 0;
+
+            foreach (var item in enumeratedSequence.Select(elt => new KeyValuePair<T, float>(elt, weightFunction(elt))))
+            {
+                currentWeightIndex += item.Value;
+
+                // if we've hit or passed the weight we're looking for then this is the one to return
+                if (currentWeightIndex >= itemWeightIndex) return item.Key;
+            }
+
+            return default;
+        }
     }
 }
