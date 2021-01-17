@@ -137,9 +137,24 @@ namespace Torii.Util
         public static bool OneIn(float chance) { return Float(chance) < 1f / chance; }
 
         // from: https://stackoverflow.com/a/1262619/13166789
-        public static IList<T> Shuffle<T>(IList<T> list)
+        public static List<T> Shuffle<T>(List<T> list)
         {
             int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = _rand.Next(n + 1);
+                T val = list[k];
+                list[k] = list[n];
+                list[n] = val;
+            }
+
+            return list;
+        }
+
+        public static T[] Shuffle<T>(T[] list)
+        {
+            int n = list.Length;
             while (n > 1)
             {
                 n--;
