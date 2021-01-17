@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Extract tag name
         run: |
-          echo "::set-env name=GIT_TAG::$(git tag --sort=-creatordate | head -n 1)"
+          echo "GIT_TAG=$(git tag --sort=-creatordate | head -n 1)" >> $GITHUB_ENV
       - name: Inject version number
         uses: cschleiden/replace-tokens@v1.0
         with:
