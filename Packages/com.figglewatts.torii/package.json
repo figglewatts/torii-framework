@@ -8,5 +8,8 @@
     "name": "Figglewatts",
     "email": "me@figglewatts.co.uk",
     "url": "https://github.com/figglewatts"
+  },
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "^2.0.2"
   }
 }
