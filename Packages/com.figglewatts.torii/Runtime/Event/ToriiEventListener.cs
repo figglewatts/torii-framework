@@ -4,7 +4,7 @@ using UnityEngine.Events;
 namespace Torii.Event
 {
     [AddComponentMenu("Torii/EventListener")]
-    public class ToriiEventListener : MonoBehaviour
+    public class ToriiEventListener : MonoBehaviour, IToriiEventListener
     {
         public ToriiEvent Event;
         
