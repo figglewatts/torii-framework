@@ -61,7 +61,7 @@ namespace Torii.Serialization
         /// <param name="filePath">The path to the JSON file.</param>
         /// <typeparam name="T">The type to deserialize to.</typeparam>
         /// <returns>The deserialized data.</returns>
-        public T JsonDeserialize<T>(string filePath) where T : class { return jsonDeserialize<T>(filePath); }
+        public T JsonDeserialize<T>(string filePath) { return jsonDeserialize<T>(filePath); }
 
         /// <summary>
         /// Deserialize a data file. If file has .json extension, then JSON is deserialized, otherwise protobuf.
@@ -69,27 +69,19 @@ namespace Torii.Serialization
         /// <param name="filePath">The path to the data.</param>
         /// <typeparam name="T">The type to deserialize to.</typeparam>
         /// <returns>The deserialized data.</returns>
-        public T Deserialize<T>(string filePath) where T : class
+        public T Deserialize<T>(string filePath)
         {
             string ext = Path.GetExtension(filePath);
 
             // check to see if we should deserialize from JSON or protobuf
-            if (ext != null && ext.Equals(".json"))
-            {
-                return jsonDeserialize<T>(filePath);
-            }
-            else
-            {
-                return protoBufDeserialize<T>(filePath);
-            }
+            return ext is ".json" ? jsonDeserialize<T>(filePath) : protoBufDeserialize<T>(filePath);
         }
 
         // deserialize from JSON
-        private T jsonDeserialize<T>(string filePath) where T : class
+        private T jsonDeserialize<T>(string filePath)
         {
             // apply settings to the serializer
-            JsonSerializerSettings settings;
-            if (_serializationSettingsTypeMap.TryGetValue(typeof(T), out settings))
+            if (_serializationSettingsTypeMap.TryGetValue(typeof(T), out JsonSerializerSettings settings))
             {
                 applyJsonSettings(settings);
             }
@@ -97,95 +89,91 @@ namespace Torii.Serialization
             // try to deserialize, and log any errors that occur
             try
             {
-                using (StreamReader sr = new StreamReader(filePath))
-                using (JsonReader reader = new JsonTextReader(sr))
-                {
-                    return _json.Deserialize<T>(reader);
-                }
+                using StreamReader sr = new(filePath);
+                using JsonReader reader = new JsonTextReader(sr);
+                return _json.Deserialize<T>(reader);
             }
             catch (FileNotFoundException e)
             {
                 Debug.LogError($"Deserialization error: Could not deserialize from \"{filePath}\", file not found");
                 Debug.LogException(e);
-                return null;
+                return default;
             }
             catch (ArgumentException e)
             {
                 Debug.LogError($"Deserialization error: Could not deserialize from \"{filePath}\", malformed path");
                 Debug.LogException(e);
-                return null;
+                return default;
             }
             catch (DirectoryNotFoundException e)
             {
                 Debug.LogError(
                     $"Deserialization error: Could not deserialize from \"{filePath}\", directory not found or path invalid");
                 Debug.LogException(e);
-                return null;
+                return default;
             }
             catch (IOException e)
             {
                 Debug.LogError(
                     $"Deserialization error: Could not deserialize from \"{filePath}\", invalid path syntax");
                 Debug.LogException(e);
-                return null;
+                return default;
             }
             catch (JsonException e)
             {
                 Debug.LogError($"Deserialization error: Could not deserialize from \"{filePath}\", JSON was in unexpected format: {e.Message}");
                 Debug.LogException(e);
-                return null;
+                return default;
             }
         }
 
         // deserialize from protobuf
-        private T protoBufDeserialize<T>(string filePath) where T : class
+        private T protoBufDeserialize<T>(string filePath)
         {
             // try to deserialize from protobuf, and log any errors that occur
             try
             {
-                using (var file = File.OpenRead(filePath))
-                {
-                    return ProtoBufSerializer.Deserialize<T>(file);
-                }
+                using var file = File.OpenRead(filePath);
+                return ProtoBufSerializer.Deserialize<T>(file);
             }
             catch (ArgumentException e)
             {
                 Debug.LogError($"Deserialization error: Could not deserialize from \"{filePath}\", malformed path");
                 Debug.LogException(e);
-                return null;
+                return default;
             }
             catch (DirectoryNotFoundException e)
             {
                 Debug.LogError(
                     $"Deserialization error: Could not deserialize from \"{filePath}\", directory not found or path invalid");
                 Debug.LogException(e);
-                return null;
+                return default;
             }
             catch (UnauthorizedAccessException e)
             {
                 Debug.LogError(
                     $"Deserialization error: Could not deserialize from \"{filePath}\", path was directory or caller does not have required permission");
                 Debug.LogException(e);
-                return null;
+                return default;
             }
             catch (FileNotFoundException e)
             {
                 Debug.LogError($"Deserialization error: Could not deserialize from \"{filePath}\", file not found");
                 Debug.LogException(e);
-                return null;
+                return default;
             }
             catch (NotSupportedException e)
             {
                 Debug.LogError(
                     $"Deserialization error: Could not deserialize from \"{filePath}\", path is in invalid format");
                 Debug.LogException(e);
-                return null;
+                return default;
             }
             catch (IOException e)
             {
                 Debug.LogError($"Deserialization error: Could not deserialize from \"{filePath}\", an error occurred opening the file");
                 Debug.LogException(e);
-                return null;
+                return default;
             }
         }
 
@@ -198,7 +186,6 @@ namespace Torii.Serialization
         /// <typeparam name="T">The type of the object.</typeparam>
         /// <returns>True of successfully serialized, false otherwise.</returns>
         public bool Serialize<T>(T obj, string filePath)
-            where T : class
         {
             Type tType = typeof(T);
             if (AttributeUtil.HasAttribute<JsonObjectAttribute>(tType))
@@ -214,11 +201,10 @@ namespace Torii.Serialization
         }
 
         // serialize an object to JSON
-        private bool jsonSerialize<T>(T obj, string filePath) where T : class
+        private bool jsonSerialize<T>(T obj, string filePath)
         {
             // apply serializer settings
-            JsonSerializerSettings settings;
-            if (_serializationSettingsTypeMap.TryGetValue(typeof(T), out settings))
+            if (_serializationSettingsTypeMap.TryGetValue(typeof(T), out JsonSerializerSettings settings))
             {
                 applyJsonSettings(settings);
             }
@@ -226,11 +212,9 @@ namespace Torii.Serialization
             // try to serialize, log any errors if they occurred
             try
             {
-                using (StreamWriter sw = new StreamWriter(filePath))
-                using (JsonWriter writer = new JsonTextWriter(sw))
-                {
-                    _json.Serialize(writer, obj);
-                }
+                using StreamWriter sw = new(filePath);
+                using JsonWriter writer = new JsonTextWriter(sw);
+                _json.Serialize(writer, obj);
             }
             catch (UnauthorizedAccessException e)
             {
@@ -270,41 +254,44 @@ namespace Torii.Serialization
         }
 
         // serialize an object to protobuf
-        private bool protoBufSerialize<T>(T obj, string filePath) where T : class
+        private bool protoBufSerialize<T>(T obj, string filePath)
         {
             // try to serialize, log any errors if they occurred
             try
             {
-                using (var file = File.Create(filePath))
-                {
-                    ProtoBufSerializer.Serialize(file, obj);
-                }
+                using var file = File.Create(filePath);
+                ProtoBufSerializer.Serialize(file, obj);
             }
             catch (UnauthorizedAccessException e)
             {
                 Debug.LogError($"Serialization error: Could not serialize to \"{filePath}\", incorrect permission or readonly file");
                 Debug.LogException(e);
+                return false;
             }
             catch (ArgumentException e)
             {
                 Debug.LogError($"Serialization error: Could not serialize to \"{filePath}\", malformed path");
                 Debug.LogException(e);
+                return false;
             }
             catch (DirectoryNotFoundException e)
             {
                 Debug.LogError($"Serialization error: Could not serialize to \"{filePath}\", directory not found or path invalid");
                 Debug.LogException(e);
+                return false;
             }
             catch (IOException e)
             {
                 Debug.LogError($"Serialization error: Could not serialize to \"{filePath}\", error occurred creating the file");
                 Debug.LogException(e);
+                return false;
 
             }
             catch (NotSupportedException e)
             {
                 Debug.LogError($"Serialization error: Could not serialize to \"{filePath}\", path is in invalid format");
                 Debug.LogException(e);
+                return false;
             }
 
             return true;
