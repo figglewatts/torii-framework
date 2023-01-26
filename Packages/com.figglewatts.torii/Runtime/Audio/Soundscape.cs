@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Torii.Audio
 {
@@ -13,5 +14,6 @@ namespace Torii.Audio
         public float MaxSoundInterval => SoundIntervalRange.y;
 
         public List<SoundscapeSound> Sounds = new List<SoundscapeSound>();
+        public AudioMixerSnapshot MixerSnapshot;
     }
 }

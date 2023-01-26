@@ -63,6 +63,16 @@ namespace Torii.Audio
             {
                 _playRandomSoundsCoroutine = StartCoroutine(playRandomSounds(soundscape));
             }
+
+            if (soundscape.MixerSnapshot == null)
+            {
+                var defaultSnapshot = _mixerGroup.audioMixer.FindSnapshot("Default");
+                _mixerGroup.audioMixer.TransitionToSnapshot(defaultSnapshot, TransitionDuration);
+            }
+            else
+            {
+                _mixerGroup.audioMixer.TransitionToSnapshot(soundscape.MixerSnapshot, TransitionDuration);
+            }
         }
 
         private void destroyCurrentSoundscape()
